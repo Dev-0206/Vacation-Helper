@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vacation Helper</title>
+
+<style>
+
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f5f5f5;
+    padding-top: 100px;
+}
+
+form {
+    background: white;
+    padding: 30px;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+input {
+    padding: 8px;
+    margin: 10px;
+}
+
+button {
+    padding: 10px 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Vacation Helper</h1>
+
+<p>Find the best trips that fit your budget.</p>
+
+<form action="/results" method="POST">
+
+<input name="origin" placeholder="Origin Airport (SEA)" required><br>
+
+<input name="budget" type="number" placeholder="Budget ($)" required><br>
+
+<input name="nights" type="number" placeholder="Trip Length (nights)" required><br>
+
+<button type="submit">Find Trips</button>
+
+</form>
+
+</body>
+</html>

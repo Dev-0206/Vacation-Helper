@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vacation Results</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 40px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+a.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+</style>
+</head>
+<body>
+
+<h1>Best Trip Options</h1>
+
+<p><b>Origin:</b> {{ origin }}</p>
+<p><b>Budget:</b> ${{ budget }}</p>
+<p><b>Trip Length:</b> {{ nights }} nights</p>
+
+{% for r in results %}
+<a class="card-link" href="/destination/{{ r.city }}">
+    <div class="card">
+        <h2>{{ r.city }} ({{ r.airport }})</h2>
+        <p>✈ Flight Cost: ${{ r.flight }}</p>
+        <p>🏨 Hotel Cost: ${{ r.hotel }}</p>
+        <p><b>Total Cost:</b> ${{ r.total }}</p>
+        <p><b>Status:</b> {{ r.fit_label }}</p>
+        <p><b>Best For:</b> {{ r.best_for }}</p>
+        <p>{{ r.reason }}</p>
+        <p><i>Click for more details</i></p>
+    </div>
+</a>
+{% endfor %}
+
+<a href="/">Search Again</a>
+
+</body>
+</html>
