@@ -1,10 +1,10 @@
 destination,airport,hotel_price,sample_flight_price,best_for,notes
-Seattle,SEA,180,220,City + Coffee,Good for neighborhoods, food, and casual city exploring
+Seattle,SEA,180,220,City + Coffee,"Good for neighborhoods, food, and casual city exploring"
 Miami,MIA,210,320,Beach + Nightlife,Best for warm weather and nightlife
-Denver,DEN,160,190,Outdoors,Great for mountains, hiking, and nature trips
+Denver,DEN,160,190,Outdoors,"Great for mountains, hiking, and nature trips"
 San Diego,SAN,220,260,Beach,Good weather and relaxing coastal activities
-Chicago,ORD,170,240,City Trip,Good for architecture, food, and downtown exploring
-Boston,BOS,230,300,History,Great for walking, museums, and historic sites
+Chicago,ORD,170,240,City Trip,"Good for architecture, food, and downtown exploring"
+Boston,BOS,230,300,History,"Great for walking, museums, and historic sites"
 Las Vegas,LAS,140,180,Nightlife,Affordable hotel options and lots of entertainment
 Phoenix,PHX,150,210,Desert + Sun,Good for warm weather and resort style trips
 Austin,AUS,175,250,Music + Food,Known for live music and casual food spots
