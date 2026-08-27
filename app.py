@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request
 import csv
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-API_KEY = "YOUR_OPENWEATHER_API_KEY_HERE"
+API_KEY = os.environ.get("OPENWEATHER_API_KEY")
 
 
 def get_weather_for_city(city):
