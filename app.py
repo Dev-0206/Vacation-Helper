@@ -10,6 +10,8 @@ import time
 
 import requests
 from dotenv import load_dotenv
+from urllib.parse import quote
+
 from flask import Flask, abort, jsonify, redirect, render_template, request, url_for
 
 load_dotenv()
@@ -69,6 +71,15 @@ def parse_trip(args):
     }
 
 
+def booking_links(d, origin):
+    """Links to Google's own search pages, where real prices live. Nothing is booked here."""
+    q = f"Flights from {origin} to {d['airport']}" if origin else f"Flights to {d['airport']}"
+    return {
+        "flights": "https://www.google.com/travel/flights?q=" + quote(q),
+        "hotels": "https://www.google.com/travel/hotels/" + quote(d["name"]),
+    }
+
+
 def price(d, nights):
     total = d["flight"] + d["hotel"] * nights
     return {"total": total, "flight": d["flight"], "hotel_total": d["hotel"] * nights}
@@ -119,7 +130,7 @@ def destination(slug):
     if not d:
         abort(404)
     trip = parse_trip(request.args)
-    return render_template("destination.html", d=d, trip=trip, p=price(d, trip["nights"]))
+    return render_template("destination.html", d=d, trip=trip, p=price(d, trip["nights"]), links=booking_links(d, trip["origin"]))
 
 
 _weather_cache = {}

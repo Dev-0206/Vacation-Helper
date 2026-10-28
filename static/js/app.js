@@ -133,6 +133,12 @@
       var v = $("#verdict"), left = bud - total;
       v.className = "verdict " + (left >= 0 ? "ok" : "no");
       v.textContent = left >= 0 ? money(left) + " left of your " + money(bud) + " budget." : "Over your " + money(bud) + " budget by " + money(-left) + ".";
+      var den = Math.max(total, bud), sf = $("#s-f");
+      if (sf) {
+        sf.style.width = (f / den * 100) + "%"; $("#s-h").style.width = (hotel / den * 100) + "%"; $("#s-l").style.width = (Math.max(0, left) / den * 100) + "%";
+        $("#lg-f").textContent = money(f); $("#lg-h").textContent = money(hotel);
+        $("#lg-lt").textContent = left >= 0 ? "Left" : "Over by"; $("#lg-l").textContent = money(Math.abs(left));
+      }
       var u = new URL(location.href); u.searchParams.set("nights", n); history.replaceState(null, "", u);
     }
     slider.addEventListener("input", calc); calc();

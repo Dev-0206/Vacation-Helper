@@ -161,3 +161,14 @@ tr.best td{background:color-mix(in srgb,var(--ok) 12%,transparent)}
 .scene-hero .wrap>*{position:relative;z-index:2}
 .scene-hero .wrap>.back{position:absolute;top:84px;left:max(20px,calc((100% - 1120px)/2));margin:0}
 .detail .panel{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
+
+/* v2.1: feedback changes */
+.scope{font-size:.8rem;color:var(--ink2);margin:6px 0 0}
+.sub{font:700 .95rem var(--sans);margin:18px 0 8px}
+.stack{display:flex;height:16px;border-radius:99px;overflow:hidden;background:var(--line)}
+.stack i{display:block;height:100%;transition:width .4s}
+.s-f{background:var(--accent)}.s-h{background:color-mix(in srgb,var(--accent) 45%,var(--ink))}.s-l{background:var(--ok)}
+.legend{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;padding:0;margin:8px 0 0;font-size:.88rem}
+.legend li{display:flex;align-items:center;gap:6px}.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.legend b{font-family:var(--mono);font-weight:500}
+.book p{margin:0 0 12px;color:var(--ink2)}.book .btn-row{display:flex;flex-wrap:wrap;gap:10px}.book .btn{min-height:44px}

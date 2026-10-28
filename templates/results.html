@@ -30,6 +30,7 @@
           <div class="split" role="img" aria-label="Flight ${{ i.flight }}, hotel ${{ i.hotel_total }}"><i style="width:{{ i.flight_pct }}%"></i></div>
           <p class="math">Flight ${{ i.flight }} + hotel ${{ '{:,}'.format(i.hotel_total) }}</p>
           <div class="meter" aria-hidden="true"><i style="width:{{ i.pct }}%"></i></div>
+          <p class="scope">Flight and hotel only. Food, activities, and taxes are not included.</p>
           <p class="left">{{ '$' ~ '{:,}'.format(i.left) ~ ' left of budget' if i.fits else 'Over budget by $' ~ '{:,}'.format(-i.left) }}</p>
         </div>
       </a>

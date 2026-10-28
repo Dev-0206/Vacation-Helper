@@ -26,11 +26,20 @@
     </ul>
     <div class="meter" aria-hidden="true"><i id="meter" style="width:{{ [100, (p.total / trip.budget * 100)|round|int]|min }}%"></i></div>
     <p id="verdict" class="verdict"></p>
+    <h3 class="sub">Where your budget goes</h3>
+    <div class="stack" role="img" aria-label="Budget split between flight, hotel, and money left"><i class="s-f" id="s-f"></i><i class="s-h" id="s-h"></i><i class="s-l" id="s-l"></i></div>
+    <ul class="legend"><li><i class="s-f"></i>Flight <b id="lg-f"></b></li><li><i class="s-h"></i>Hotel <b id="lg-h"></b></li><li><i class="s-l"></i><span id="lg-lt">Left</span> <b id="lg-l"></b></li></ul>
+    <p class="scope">This covers a flight and hotel only. Food, activities, and taxes are not included.</p>
     <p class="fine">Estimates from a sample list. Check real prices before booking.</p>
   </div>
   <div class="panel wx" id="wx" aria-live="polite">
     <h2>Right now in {{ d.name }}</h2>
     <p class="wx-body">Checking the weather&hellip;</p>
+  </div>
+  <div class="panel book">
+    <h2>Check real prices</h2>
+    <p>These numbers are estimates. Google shows current prices for your dates.</p>
+    <div class="btn-row"><a class="btn" target="_blank" rel="noopener" href="{{ links.flights }}">Flights to {{ d.airport }} &#8599;</a><a class="btn" target="_blank" rel="noopener" href="{{ links.hotels }}">Hotels in {{ d.name }} &#8599;</a></div>
   </div>
   <div class="panel why">
     <h2>Why it fits</h2>

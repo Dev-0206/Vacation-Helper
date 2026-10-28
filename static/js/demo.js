@@ -49,7 +49,7 @@
         '<div class="split" role="img" aria-label="Flight ' + m(i.flight) + ", hotel " + m(i.hotel_total) + '"><i style="width:' + i.fpct + '%"></i></div>' +
         '<p class="math">Flight ' + m(i.flight) + " + hotel " + m(i.hotel_total) + "</p>" +
         '<div class="meter" aria-hidden="true"><i style="width:' + i.pct + '%"></i></div>' +
-        '<p class="left">' + (i.fits ? m(i.left) + " left of budget" : "Over budget by " + m(-i.left)) + "</p></div></a>" +
+        '<p class="scope">Flight and hotel only. Food, activities, and taxes are not included.</p><p class="left">' + (i.fits ? m(i.left) + " left of budget" : "Over budget by " + m(-i.left)) + "</p></div></a>" +
         '<label class="cmp"><input type="checkbox" class="cmp-box" value="' + i.slug + '"> Compare</label></li>';
     }).join("");
     main.innerHTML = '<section class="wrap"><a class="back" href="index.html' + tq() + '">&larr; Change trip</a>' +
@@ -76,8 +76,12 @@
       '<div class="split lg" role="img" aria-label="Flight versus hotel share"><i id="split" style="width:' + Math.round(d.flight / total * 100) + '%"></i></div>' +
       '<ul class="lines"><li><span>Sample flight</span><b id="l-flight">' + m(d.flight) + '</b></li><li><span>Hotel, <span id="l-n">' + trip.nights + "</span> &times; " + m(d.hotel) + '</span><b id="l-hotel">' + m(d.hotel * trip.nights) + "</b></li></ul>" +
       '<div class="meter" aria-hidden="true"><i id="meter" style="width:' + Math.min(100, Math.round(total / trip.budget * 100)) + '%"></i></div><p id="verdict" class="verdict"></p>' +
+      '<h3 class="sub">Where your budget goes</h3><div class="stack" role="img" aria-label="Budget split between flight, hotel, and money left"><i class="s-f" id="s-f"></i><i class="s-h" id="s-h"></i><i class="s-l" id="s-l"></i></div>' +
+      '<ul class="legend"><li><i class="s-f"></i>Flight <b id="lg-f"></b></li><li><i class="s-h"></i>Hotel <b id="lg-h"></b></li><li><i class="s-l"></i><span id="lg-lt">Left</span> <b id="lg-l"></b></li></ul>' +
+      '<p class="scope">This covers a flight and hotel only. Food, activities, and taxes are not included.</p>' +
       '<p class="fine">Estimates from a sample list. Check real prices before booking.</p></div>' +
       '<div class="panel wx" id="wx" aria-live="polite"><h2>Right now in ' + esc(d.name) + '</h2><p class="wx-body"></p></div>' +
+      '<div class="panel book"><h2>Check real prices</h2><p>These numbers are estimates. Google shows current prices for your dates.</p><div class="btn-row"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/travel/flights?q=' + encodeURIComponent(trip.origin ? "Flights from " + trip.origin + " to " + d.airport : "Flights to " + d.airport) + '">Flights to ' + d.airport + ' &#8599;</a><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/travel/hotels/' + encodeURIComponent(d.name) + '">Hotels in ' + esc(d.name) + ' &#8599;</a></div></div>' +
       '<div class="panel why"><h2>Why it fits</h2><div class="chips static">' + d.vibes.map(function (v) { return '<span class="chip on"><span>' + VL[v] + "</span></span>"; }).join("") + "</div><p>" + esc(d.notes) + ".</p></div></section>";
   }
 })();
