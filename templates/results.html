@@ -4,7 +4,7 @@
 {% block main %}
 <section class="wrap">
   <a class="back" href="{{ url_for('index', **q) }}">&larr; Change trip</a>
-  <h1 class="display sm">{{ fit_count }} of {{ items|length }} fit ${{ '{:,}'.format(trip.budget) }} for {{ trip.nights }} night{{ '' if trip.nights == 1 else 's' }}</h1>
+  <h1 class="display sm"><span id="sum-fit">{{ fit_count }}</span> of <span id="sum-total">{{ items|length }}</span> fit ${{ '{:,}'.format(trip.budget) }} for {{ trip.nights }} night{{ '' if trip.nights == 1 else 's' }}</h1>
   <p class="lede">Total = sample flight + hotel &times; {{ trip.nights }}. Taxes, food, and transport are not included.</p>
 
   <div class="toolbar" id="toolbar">

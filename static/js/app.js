@@ -74,6 +74,8 @@
         if (!c.hidden) shown++;
       });
       empty.hidden = shown > 0;
+      var sf = $("#sum-fit"), st = $("#sum-total");
+      if (sf && st) { st.textContent = shown; sf.textContent = cards.filter(function (c) { return !c.hidden && c.dataset.fits === "1"; }).length; }
     }
     [sort, over].concat(vibeBoxes).forEach(function (el) { el.addEventListener("change", apply); });
     apply();
@@ -136,7 +138,8 @@
     slider.addEventListener("input", calc); calc();
 
     var wx = $("#wx .wx-body"), ctl = new AbortController(), t = setTimeout(function () { ctl.abort(); }, 7000);
-    fetch("/api/weather/" + det.dataset.slug, { signal: ctl.signal }).then(function (r) { return r.json(); }).then(function (j) {
+    if (window.VH_DEMO) { wx.textContent = "Live weather is part of the full Flask app. This demo shows the trip math only."; ctl.abort(); clearTimeout(t); }
+    else fetch("/api/weather/" + det.dataset.slug, { signal: ctl.signal }).then(function (r) { return r.json(); }).then(function (j) {
       clearTimeout(t);
       if (j.error) { wx.textContent = "Live weather isn't available right now. The trip math above still works."; return; }
       wx.innerHTML = "<span class='wx-temp'>" + j.temp + "&deg;F</span><br>" + j.desc +
