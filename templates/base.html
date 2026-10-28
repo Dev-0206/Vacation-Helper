@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Vacation Helper{% endblock %}</title>
+  <meta name="description" content="Pick a budget and trip length. See which US destinations fit, and why, with the math shown.">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ url_for('static', filename='fonts/instrument-serif-latin-400-normal.woff2') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top"><a class="logo" href="{{ url_for('index') }}"><span class="logo-mark" aria-hidden="true"></span>Vacation Helper</a></header>
+  <main id="main">{% block main %}{% endblock %}</main>
+  <footer class="foot">Prices are estimates from a sample list, not live quotes. Weather is live. Built by Dev Gandhi.</footer>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

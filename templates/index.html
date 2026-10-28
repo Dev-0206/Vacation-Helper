@@ -1,54 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Vacation Helper</title>
+{% extends "base.html" %}
+{% block bodyclass %}home{% endblock %}
+{% block main %}
+<div class="backdrop" id="backdrop" aria-hidden="true">
+  {% for s in scenes %}<img src="{{ url_for('static', filename='scenes/' ~ s ~ '.svg') }}" alt="" data-scene="{{ s }}" {% if loop.first %}class="on"{% endif %}>{% endfor %}
+</div>
+<section class="hero wrap">
+  <p class="eyebrow">Trip planner</p>
+  <h1 class="display">Where can your budget take you?</h1>
+  <p class="lede">Tell us what you can spend and how long you have. We rank {{ scenes|length }} US destinations and show the math behind every one.</p>
 
-<style>
-
-body {
-    font-family: Arial;
-    text-align: center;
-    background: #f5f5f5;
-    padding-top: 100px;
-}
-
-form {
-    background: white;
-    padding: 30px;
-    display: inline-block;
-    border-radius: 10px;
-}
-
-input {
-    padding: 8px;
-    margin: 10px;
-}
-
-button {
-    padding: 10px 20px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<h1>Vacation Helper</h1>
-
-<p>Find the best trips that fit your budget.</p>
-
-<form action="/results" method="POST">
-
-<input name="origin" placeholder="Origin Airport (SEA)" required><br>
-
-<input name="budget" type="number" placeholder="Budget ($)" required><br>
-
-<input name="nights" type="number" placeholder="Trip Length (nights)" required><br>
-
-<button type="submit">Find Trips</button>
-
-</form>
-
-</body>
-</html>
+  <form class="panel plan" action="{{ url_for('results') }}" method="get" id="plan" novalidate>
+    <div class="field">
+      <label for="origin">Flying from <span class="hint">(airport code)</span></label>
+      <input id="origin" name="origin" value="{{ trip.origin or 'SEA' }}" maxlength="3" autocomplete="off" inputmode="text" pattern="[A-Za-z]{3}" required>
+    </div>
+    <div class="field">
+      <label for="budget">Total budget</label>
+      <div class="num"><span aria-hidden="true">$</span><input id="budget" name="budget" type="number" min="100" max="{{ MAX_BUDGET }}" step="50" value="{{ trip.budget }}" required></div>
+      <input class="range" id="budget-r" type="range" min="300" max="6000" step="50" value="{{ [trip.budget, 6000]|min }}" aria-label="Budget slider">
+    </div>
+    <div class="field">
+      <label for="nights">Nights</label>
+      <div class="stepper">
+        <button type="button" data-step="-1" aria-label="Fewer nights">&minus;</button>
+        <input id="nights" name="nights" type="number" min="1" max="{{ MAX_NIGHTS }}" value="{{ trip.nights }}" required>
+        <button type="button" data-step="1" aria-label="More nights">+</button>
+      </div>
+    </div>
+    <fieldset class="field wide">
+      <legend>What do you want? <span class="hint">(optional, pick any)</span></legend>
+      <div class="chips">
+        {% for key, label in VIBES %}<label class="chip"><input type="checkbox" name="vibe" value="{{ key }}" {% if key in trip.vibes %}checked{% endif %}><span>{{ label }}</span></label>{% endfor %}
+      </div>
+    </fieldset>
+    <div class="live wide" id="live" aria-live="polite"></div>
+    <button class="btn primary wide" type="submit">Show my trips</button>
+    <p class="fine wide">Flight and hotel prices are sample estimates. The airport you pick only removes it from the list; it does not change flight prices.</p>
+  </form>
+</section>
+<script id="dest-data" type="application/json">{{ data|tojson }}</script>
+{% endblock %}

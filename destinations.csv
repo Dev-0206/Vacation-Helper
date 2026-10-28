@@ -1,16 +1,16 @@
-destination,airport,hotel_price,sample_flight_price,best_for,notes
-Seattle,SEA,180,220,City + Coffee,"Good for neighborhoods, food, and casual city exploring"
-Miami,MIA,210,320,Beach + Nightlife,Best for warm weather and nightlife
-Denver,DEN,160,190,Outdoors,"Great for mountains, hiking, and nature trips"
-San Diego,SAN,220,260,Beach,Good weather and relaxing coastal activities
-Chicago,ORD,170,240,City Trip,"Good for architecture, food, and downtown exploring"
-Boston,BOS,230,300,History,"Great for walking, museums, and historic sites"
-Las Vegas,LAS,140,180,Nightlife,Affordable hotel options and lots of entertainment
-Phoenix,PHX,150,210,Desert + Sun,Good for warm weather and resort style trips
-Austin,AUS,175,250,Music + Food,Known for live music and casual food spots
-New York,JFK,260,340,Big City,Best for iconic attractions and nonstop activity
-Orlando,MCO,200,290,Theme Parks,Good for entertainment and family travel
-San Francisco,SFO,240,310,Views + City,Known for scenery and major landmarks
-Nashville,BNA,170,230,Music,Best for live music and weekend trips
-Portland,PDX,160,210,Food + Coffee,Good for laid back city travel
-Salt Lake City,SLC,150,200,Outdoors,Great for mountain views and outdoor activities
+destination,airport,hotel_price,sample_flight_price,best_for,notes,vibes
+Seattle,SEA,180,220,City + Coffee,"Good for neighborhoods, food, and casual city exploring","city,food,outdoors"
+Miami,MIA,210,320,Beach + Nightlife,Best for warm weather and nightlife,"beach,nightlife,warm"
+Denver,DEN,160,190,Outdoors,"Great for mountains, hiking, and nature trips",outdoors
+San Diego,SAN,220,260,Beach,Good weather and relaxing coastal activities,"beach,warm,outdoors"
+Chicago,ORD,170,240,City Trip,"Good for architecture, food, and downtown exploring","city,food,culture"
+Boston,BOS,230,300,History,"Great for walking, museums, and historic sites","city,culture,food"
+Las Vegas,LAS,140,180,Nightlife,Affordable hotel options and lots of entertainment,"nightlife,warm"
+Phoenix,PHX,150,210,Desert + Sun,Good for warm weather and resort style trips,"warm,outdoors"
+Austin,AUS,175,250,Music + Food,Known for live music and casual food spots,"food,nightlife,culture"
+New York,JFK,260,340,Big City,Best for iconic attractions and nonstop activity,"city,culture,food,nightlife"
+Orlando,MCO,200,290,Theme Parks,Good for entertainment and family travel,"family,warm"
+San Francisco,SFO,240,310,Views + City,Known for scenery and major landmarks,"city,food,outdoors"
+Nashville,BNA,170,230,Music,Best for live music and weekend trips,"nightlife,culture,food"
+Portland,PDX,160,210,Food + Coffee,Good for laid back city travel,"food,outdoors"
+Salt Lake City,SLC,150,200,Outdoors,Great for mountain views and outdoor activities,outdoors

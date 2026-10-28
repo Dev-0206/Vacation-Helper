@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Not found | Vacation Helper{% endblock %}
+{% block main %}<section class="wrap narrow"><h1 class="display">That place isn't on the map.</h1><p class="lede">We don't have that destination.</p><a class="btn primary" href="{{ url_for('index') }}">Plan a trip</a></section>{% endblock %}

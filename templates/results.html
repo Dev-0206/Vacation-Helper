@@ -1,58 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Vacation Results</title>
+{% extends "base.html" %}
+{% block title %}Trips for ${{ trip.budget }} | Vacation Helper{% endblock %}
+{% set q = {'origin': trip.origin, 'budget': trip.budget, 'nights': trip.nights, 'vibe': trip.vibes} %}
+{% block main %}
+<section class="wrap">
+  <a class="back" href="{{ url_for('index', **q) }}">&larr; Change trip</a>
+  <h1 class="display sm">{{ fit_count }} of {{ items|length }} fit ${{ '{:,}'.format(trip.budget) }} for {{ trip.nights }} night{{ '' if trip.nights == 1 else 's' }}</h1>
+  <p class="lede">Total = sample flight + hotel &times; {{ trip.nights }}. Taxes, food, and transport are not included.</p>
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    padding: 40px;
-}
-
-.card {
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-a.card-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-h1 {
-    margin-bottom: 30px;
-}
-</style>
-</head>
-<body>
-
-<h1>Best Trip Options</h1>
-
-<p><b>Origin:</b> {{ origin }}</p>
-<p><b>Budget:</b> ${{ budget }}</p>
-<p><b>Trip Length:</b> {{ nights }} nights</p>
-
-{% for r in results %}
-<a class="card-link" href="/destination/{{ r.city }}">
-    <div class="card">
-        <h2>{{ r.city }} ({{ r.airport }})</h2>
-        <p>✈ Flight Cost: ${{ r.flight }}</p>
-        <p>🏨 Hotel Cost: ${{ r.hotel }}</p>
-        <p><b>Total Cost:</b> ${{ r.total }}</p>
-        <p><b>Status:</b> {{ r.fit_label }}</p>
-        <p><b>Best For:</b> {{ r.best_for }}</p>
-        <p>{{ r.reason }}</p>
-        <p><i>Click for more details</i></p>
+  <div class="toolbar" id="toolbar">
+    <div class="chips" role="group" aria-label="Filter by vibe">
+      {% for key, label in VIBES %}<label class="chip"><input type="checkbox" value="{{ key }}" {% if key in trip.vibes %}checked{% endif %}><span>{{ label }}</span></label>{% endfor %}
     </div>
-</a>
-{% endfor %}
+    <div class="tools">
+      <label class="sel">Sort <select id="sort"><option value="price">Lowest total</option><option value="left">Most left over</option><option value="name">Name</option></select></label>
+      <label class="switch"><input type="checkbox" id="over" checked><span>Show over budget</span></label>
+    </div>
+  </div>
+  <p class="empty" id="empty" hidden>Nothing matches those filters. Clear a vibe or show over-budget trips.</p>
 
-<a href="/">Search Again</a>
+  <ol class="grid" id="grid">
+    {% for i in items %}
+    <li class="card {{ '' if i.fits else 'over' }}" data-slug="{{ i.slug }}" data-name="{{ i.name }}" data-total="{{ i.total }}" data-fits="{{ 1 if i.fits else 0 }}" data-vibes="{{ i.vibes|join(',') }}" data-flight="{{ i.flight }}" data-hotel="{{ i.hotel_total }}" data-left="{{ i.left }}">
+      <a class="card-link" href="{{ url_for('destination', slug=i.slug, **q) }}" aria-label="{{ i.name }}, estimated ${{ i.total }}, {{ 'fits' if i.fits else 'over' }} budget">
+        <div class="art"><img loading="lazy" src="{{ url_for('static', filename='scenes/' ~ i.slug ~ '.svg') }}" alt=""><span class="tag {{ 'ok' if i.fits else 'no' }}">{{ 'Fits budget' if i.fits else 'Over by $' ~ '{:,}'.format(-i.left) }}</span></div>
+        <div class="body">
+          <h2>{{ i.name }} <span class="code">{{ i.airport }}</span></h2>
+          <p class="bf">{{ i.best_for }}</p>
+          <p class="total">${{ '{:,}'.format(i.total) }} <span>estimated</span></p>
+          <div class="split" role="img" aria-label="Flight ${{ i.flight }}, hotel ${{ i.hotel_total }}"><i style="width:{{ i.flight_pct }}%"></i></div>
+          <p class="math">Flight ${{ i.flight }} + hotel ${{ '{:,}'.format(i.hotel_total) }}</p>
+          <div class="meter" aria-hidden="true"><i style="width:{{ i.pct }}%"></i></div>
+          <p class="left">{{ '$' ~ '{:,}'.format(i.left) ~ ' left of budget' if i.fits else 'Over budget by $' ~ '{:,}'.format(-i.left) }}</p>
+        </div>
+      </a>
+      <label class="cmp"><input type="checkbox" class="cmp-box" value="{{ i.slug }}"> Compare</label>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
 
-</body>
-</html>
+<div class="tray" id="tray" hidden>
+  <span id="tray-n"></span>
+  <button class="btn primary" id="tray-go" type="button">Compare</button>
+  <button class="btn" id="tray-clear" type="button">Clear</button>
+</div>
+<dialog id="cmp-dialog" aria-labelledby="cmp-h">
+  <form method="dialog"><button class="x" aria-label="Close">&times;</button></form>
+  <h2 id="cmp-h">Side by side</h2>
+  <div class="tbl-wrap"><table id="cmp-table"></table></div>
+</dialog>
+{% endblock %}
