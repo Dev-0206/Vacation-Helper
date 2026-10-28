@@ -3,7 +3,7 @@
 A Flask trip planner. Enter a budget and trip length, and it ranks US destinations by what fits, showing the math (sample flight + hotel x nights) behind each one.
 
 ## Two versions
-- **Class version (original submission):** preserved at the git tag `class-submission`.
+- **Class version (original submission):** preserved at the git branch `class-submission`.
 - **v2 redesign (current `main`):** built after the class ended. Scenic per-destination backgrounds, live "how many fit" feedback, filters and sorting, side-by-side compare, a nights slider that recalculates cost, input validation, and accessibility work. See `ai.txt` for how AI was used.
 
 ## What is real and what is not
